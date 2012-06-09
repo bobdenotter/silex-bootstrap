@@ -7,3 +7,6 @@ Installation:
 
 curl -s http://getcomposer.org/installer | php
 php composer.phar install
+
+And you're good to go. 
+

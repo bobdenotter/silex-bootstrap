@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__.'/config.php';
 require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/lib.php';
 
@@ -11,7 +12,7 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile'       => __DIR__.'/debug.log',
-    'monolog.class_path'    => __DIR__.'/vendor/monolog/src',
+//     'monolog.class_path'    => __DIR__.'/vendor/monolog/src',
 ));
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
