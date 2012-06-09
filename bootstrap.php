@@ -12,13 +12,11 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile'       => __DIR__.'/debug.log',
-//     'monolog.class_path'    => __DIR__.'/vendor/monolog/src',
 ));
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path'       => __DIR__.'/view',
-    'twig.class_path' => __DIR__.'/vendor/twig/lib',
-    'twig.options' => array('debug'=>true), // 'cache' => __DIR__.'/cache',
+    'twig.options' => array('debug'=>true), 
 ));
 
 $app['twig']->addExtension(new Twig_Extension_Debug());
@@ -26,13 +24,11 @@ $app['twig']->addExtension(new Twig_Extension_Debug());
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options'            => array(
         'driver'    => 'pdo_mysql',
-        'host'      => '192.168.0.3',  // '62.41.227.122',
-        'dbname'    => 'gezondheidsnet',
-        'user'      => 'root',
-        'password'  => 'Piv87otTgn',
-    ),
-    'db.dbal.class_path'    => __DIR__.'/vendor/doctrine-dbal/lib',
-    'db.common.class_path'  => __DIR__.'/vendor/doctrine-common/lib',
+        'host'      => $config['db_host'],
+        'dbname'    => $config['db_dbname'],
+        'user'      => $config['db_user'],
+        'password'  => $config['db_password'],
+    )
 ));
 
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +51,12 @@ $app->error(function(Exception $e) use ($app) {
     $twigvars['class'] = get_class($e);
     $twigvars['message'] = $e->getMessage();
     $twigvars['code'] = $e->getCode();
-    // $twigvars['trace'] = $e->getTrace();
+
+	$trace = $e->getTrace();;
+
+	unset($trace[0]['args']);
+
+    $twigvars['trace'] = print_r($trace[0], true);
 
     $twigvars['title'] = "Een error!";
 
