@@ -9,18 +9,9 @@ $app->get("/", function(Silex\Application $app) {
 
     $twigvars = array();
 
-    $twigvars['title'] = "Gezondheidsnet - Zakwoordenboekje - Si!";
+    $twigvars['title'] = "Silex skeleton app";
 
-    $tempgroups = $app['db']->fetchAll('SELECT DISTINCT groupname FROM  `woorden` ORDER BY groupname LIMIT 0 , 100');
-
-
-    foreach($tempgroups as $group) {
-        $groups[ makeURI($group['groupname']) ] = $group['groupname'];
-    }
-
-    $twigvars['groups'] = $groups;
-    
-    $twigvars['words'] = $app['db']->fetchAll('SELECT * FROM  `woorden` ORDER BY nl');
+    $twigvars['content'] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.";
 
     
     
