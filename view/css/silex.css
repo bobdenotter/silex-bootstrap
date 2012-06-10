@@ -5,11 +5,12 @@
 
 footer  {    
     display: block;
-    border-top: 1px solid #CCC;
-    
+    border-top: 1px solid #CCC; 
 }
 
 
-div.container {
+#main {
+    
+    margin: 20px;
 
 }
