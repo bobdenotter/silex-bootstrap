@@ -1,7 +1,7 @@
 silex-bootstrap
 ===============
 
-My own (Silex)[http://silex.sensiolabs.org/] skeleton application, useful 
+My own [Silex](http://silex.sensiolabs.org/) skeleton application, useful 
 for quickly setting up a new Silex project.
 
 Installation: 
