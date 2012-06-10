@@ -1,24 +1,19 @@
 <?php
 
-require "bootstrap.php";
+if (!file_exists(__DIR__.'/config.php')) {
+    echo "<p>The file <tt>config.php</tt> doesn't exist. Copy <tt>config.php.dist</tt> to <tt>config.php</tt> and add the correct settings.</p>";
+    die();
+}
 
-/**
- * "root"
- */
-$app->get("/", function(Silex\Application $app) {
+if (!file_exists(__DIR__.'/vendor/autoload.php')) {
+    echo "<p>The file <tt>vendor/autoload.php</tt> doesn't exist. Make sure you've installed the Silex components with Composer. See the README.md file.</p>";
+    die();
+}
 
-    $twigvars = array();
-
-    $twigvars['title'] = "Silex skeleton app";
-
-    $twigvars['content'] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.";
-
-    
-    return $app['twig']->render('index.twig', $twigvars);
-
-
-});
-
-
+require_once __DIR__.'/config.php';
+require_once __DIR__.'/bootstrap.php';
+require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/app.php';
+require_once __DIR__.'/lib.php';
 
 $app->run();
