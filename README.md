@@ -6,8 +6,8 @@ for quickly setting up a new Silex project.
 
 Installation: 
 
-  curl -s http://getcomposer.org/installer | php
-  php composer.phar install
+    curl -s http://getcomposer.org/installer | php
+    php composer.phar install
 
 And you're good to go. 
 
