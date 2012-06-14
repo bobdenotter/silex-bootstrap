@@ -1,7 +1,7 @@
 <?php
 
-if (!file_exists(__DIR__.'/config.php')) {
-    echo "<p>The file <tt>config.php</tt> doesn't exist. Copy <tt>config.php.dist</tt> to <tt>config.php</tt> and add the correct settings.</p>";
+if (!file_exists(__DIR__.'/app/config.php')) {
+    echo "<p>The file <tt>app/config.php</tt> doesn't exist. Copy <tt>config.php.dist</tt> to <tt>config.php</tt> and add the correct settings.</p>";
     die();
 }
 
@@ -10,10 +10,10 @@ if (!file_exists(__DIR__.'/vendor/autoload.php')) {
     die();
 }
 
-require_once __DIR__.'/config.php';
+require_once __DIR__.'/app/config.php';
 require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/bootstrap.php';
-require_once __DIR__.'/app.php';
-require_once __DIR__.'/lib.php';
+require_once __DIR__.'/app/bootstrap.php';
+require_once __DIR__.'/app/app.php';
+require_once __DIR__.'/app/lib.php';
 
 $app->run();
