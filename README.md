@@ -8,7 +8,8 @@ Installation:
 
 Create a new folder, and clone from github. Then use composer to get the Silex micro-framework and components:
 
-    git clone git://github.com/bobdenotter/silex-bootstrap.git .
+    git clone git://github.com/bobdenotter/silex-bootstrap.git silex-bootstrap
+    cd silex-bootstrap
     curl -s http://getcomposer.org/installer | php
     php composer.phar install
 
