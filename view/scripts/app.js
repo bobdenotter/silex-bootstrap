@@ -22,11 +22,11 @@
         },
          debouncedResize = $.debounce(resize, 50);;
 
-    $(w).on("resize orientationchange", function () {
+    $(window).on("resize orientationchange", function () {
         debouncedResize();
     });
 
-    $(d).on("ready", function () {
+    $(document).on("ready", function () {
         resize();
     });
 
@@ -44,4 +44,4 @@
         }, relativeTime);
 
     });
-}(jQuery, window, document));
+}(jQuery));
