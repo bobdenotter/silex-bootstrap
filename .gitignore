@@ -3,3 +3,5 @@ composer.phar
 composer.lock
 app/config.php
 debug.log
+.sass-cache/
+bower_components/
