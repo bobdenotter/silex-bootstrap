@@ -1,7 +1,10 @@
 
 body {
     font-family: Arial, sans-serif;
-    padding-top: 2rem;
+    padding-top: 4em;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;    
 }
 
 nav[role="navigation"] {
@@ -15,12 +18,12 @@ nav[role="navigation"] {
     padding: .2rem 0;
 }
 
-    nav[role="navigation"] a {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        float: left;
-    }
+nav[role="navigation"] a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    float: left;
+}
 
 nav[role="navigation"] a[rel="home"] {
     font-size: 1.5rem;
@@ -82,11 +85,15 @@ nav[role="navigation"] [data-dropdown-target] {
     }
 }
 
-
-.main {
-    margin-top: 32px;
+footer {
+    background-color:  #666;
+    color: #EEE;
+    padding: 6px;
 }
 
+.main {
+    flex: 1;
+}
 
 pre.sf-dump, pre.sf-dump * {
     background-color: #18171B !important;
