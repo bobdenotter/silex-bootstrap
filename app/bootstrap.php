@@ -1,8 +1,17 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 $app = new Silex\Application();
 
 $app['debug'] = true;
+
+$yaml = new Symfony\Component\Yaml\Parser();
+
+$app['config'] = $yaml->parse(file_get_contents(__DIR__ . '/config.yml'));
+
+// dump($app['config']);
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 
@@ -27,11 +36,9 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     )
 ));
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Foutmelding
+ * Error handling
  */
 $app->error(function(Exception $e) use ($app) {
 
@@ -54,7 +61,7 @@ $app->error(function(Exception $e) use ($app) {
 
     $twigvars['trace'] = print_r($trace[0], true);
 
-    $twigvars['title'] = "Een error!";
+    $twigvars['title'] = "An error has occured!";
 
     return $app['twig']->render('error.twig', $twigvars);
 
