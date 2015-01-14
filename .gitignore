@@ -6,3 +6,4 @@ debug.log
 .sass-cache/
 bower_components/
 node_modules/
+app/config.yml
