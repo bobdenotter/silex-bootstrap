@@ -1,5 +1,10 @@
-{% include '_header.twig' %}
+{% extends '_base.twig' %}
 
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
 <h1>
 	Error: {{class}}
 </h1>
@@ -9,8 +14,7 @@
 
 <p>code: <tt>{{code}}</tt></p>
 
-<pre> {{ trace }} </pre>
+{{ dump(trace) }} 
 
 
-
-{% include '_footer.twig' %}
+{% endblock %}

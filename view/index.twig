@@ -1,9 +1,12 @@
-{% include '_header.twig' %}
+{% extends '_base.twig' %}
 
+{% block title %}
+    {{ title|default("No title") }} | Silex bootstrap.
+{% endblock %}
 
-<h1>{{title}}</h1>
+{% block content %}
+    {{ content|default("No content") }}
 
-{{content}}
+    {{ dump(config) }}
 
-
-{% include '_footer.twig' %}
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Your Page Description." />
+        <title>{% block title %}(title goes here){% endblock %}</title>
+ 
+        <link href="/view/styles/responsive.min.css" rel="stylesheet" />
+        <link href="/view/styles/app.css" rel="stylesheet" />
+    </head>
+    <body>
+    <nav role="navigation" class="shadow">
+        <div class="container">
+            <div class="row">
+                <a href="/" rel="home">{{ config.title }}</a>
+                <button data-dropdown-target="#navigation" class="visible-xxs visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
+                <div id="navigation" class="collapse">
+                    <a href="/getting-started/" >Getting Started</a>
+                    <a href="/css/"  class="active" >CSS</a>
+                    <a href="/javascript/" >JavaScript</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main container">
+
+        {% block content %}(content goes here){% endblock %}
+    
+
+    </div>
+
+
+        <!-- Scripts at the bottom for improved performance. -->
+        <!-- jQuery, required for all responsive plugins. -->
+        <script src="/view/scripts/jquery.min.js"></script>
+        <script src="/view/scripts/responsive.min.js"></script>
+    </body>
+</html>
