@@ -5,3 +5,5 @@ database:
   user: xxx
   password: xxx
 
+
+title: Silex Bootstrap
