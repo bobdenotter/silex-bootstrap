@@ -7,3 +7,4 @@ debug.log
 bower_components/
 node_modules/
 app/config.yml
+cache/
