@@ -19,23 +19,45 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile'       => __DIR__.'/debug.log',
 ));
 
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path'       => dirname(__DIR__).'/view',
-    'twig.options' => array('debug'=>true), 
+    'twig.options' => array(
+        'debug' => true,
+        'cache' => __DIR__ . '/../cache'
+    ) 
 ));
 
-$app['twig']->addExtension(new Twig_Extension_Debug());
+$app['twig']->addGlobal('config', $app['config']);
+
+$app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
+    'profiler.cache_dir' => __DIR__ . '/../cache',
+));
+
+$webProfilerPath = __DIR__ . '/../vendor/symfony/web-profiler-bundle/Symfony/Bundle/WebProfilerBundle/Resources/views'; 
+$app['twig.loader.filesystem']->addPath($webProfilerPath, 'WebProfiler');
+
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options'            => array(
         'driver'    => 'pdo_mysql',
-        'host'      => $config['db_host'],
-        'dbname'    => $config['db_dbname'],
-        'user'      => $config['db_user'],
-        'password'  => $config['db_password'],
+        'host'      => $app['config']['database']['host'],
+        'dbname'    => $app['config']['database']['databasename'],
+        'user'      => $app['config']['database']['user'],
+        'password'  => $app['config']['database']['password'],
     )
 ));
 
+/**
+ * Custom Twig functions
+ */
+$app['twig']->addFunction(new Twig_SimpleFunction('dump', 
+    function ($var) {
+        dump($var);
+    }
+));
 
 /**
  * Error handling
@@ -59,7 +81,7 @@ $app->error(function(Exception $e) use ($app) {
 
 	unset($trace[0]['args']);
 
-    $twigvars['trace'] = print_r($trace[0], true);
+    $twigvars['trace'] = $trace[0];
 
     $twigvars['title'] = "An error has occured!";
 
