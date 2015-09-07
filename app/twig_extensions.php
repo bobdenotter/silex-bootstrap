@@ -5,8 +5,12 @@ $app['twig']->addFunction(new \Twig_SimpleFunction('asset', function ($asset) us
     }
 ));
 
-$app['twig']->addFunction(new \Twig_SimpleFunction('dump', function ($var) {
-        dump($var);
+$app['twig']->addFunction(new \Twig_SimpleFunction('dump', function ($var) use ($app) {
+
+        if ($app['config']['debug']) {
+            dump($var);
+        }
+
     }
 ));
 

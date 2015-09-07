@@ -1,9 +1,9 @@
-
 database:
   host: localhost
   databasename: xxx
   user: xxx
   password: xxx
 
+debug: true
 
 title: Silex Bootstrap
