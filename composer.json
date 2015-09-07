@@ -4,12 +4,17 @@
         "silex/silex": "~2.0@dev",
         "doctrine/dbal": "~2.5",
         "monolog/monolog": "~1.12",
-        "twig/twig": "~1.17",
-        "symfony/yaml": "~2.6",
-        "symfony/var-dumper": "~2.6",
+        "twig/twig": "~1.21",
+        "symfony/yaml": "~2.7",
+        "symfony/var-dumper": "~2.7",
         "silex/web-profiler": "~2.0@dev"
     },
     "autoload": {
         "psr-0": { "": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
 }
