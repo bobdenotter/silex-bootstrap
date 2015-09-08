@@ -11,7 +11,8 @@
  * @param string $name
  * @return boolean
  */
-function makeDir($name) {
+function makeDir($name)
+{
 
 
     // if it exists, just return.
@@ -49,7 +50,8 @@ function makeDir($name) {
  * @param int $length
  * @return string
  */
-function makeKey($length) {
+function makeKey($length)
+{
 
     $seed = "0123456789abcdefghijklmnopqrstuvwxyz";
     $len = strlen($seed);
@@ -70,7 +72,8 @@ function makeKey($length) {
  * @param string $filename
  * @return string
  */
-function getExtension($filename) {
+function getExtension($filename)
+{
     $pos=strrpos($filename, ".");
     if ($pos === false) {
         return "";
@@ -91,10 +94,11 @@ function getExtension($filename) {
  * @param boolean $strict
  * @return string
  */
-function safeString($str, $strict=false, $extrachars="") {
+function safeString($str, $strict=false, $extrachars="")
+{
 
     // replace UTF-8 non ISO-8859-1 first
-    $str = strtr($str, array(
+    $str = strtr($str, [
         "\xC3\x80"=>'A', "\xC3\x81"=>'A', "\xC3\x82"=>'A', "\xC3\x83"=>'A',
         "\xC3\x84"=>'A', "\xC3\x85"=>'A', "\xC3\x87"=>'C', "\xC3\x88"=>'E',
         "\xC3\x89"=>'E', "\xC3\x8A"=>'E', "\xC3\x8B"=>'E', "\xC3\x8C"=>'I',
@@ -140,14 +144,14 @@ function safeString($str, $strict=false, $extrachars="") {
         "\xC5\xB3"=>'u', "\xC5\xB4"=>'W', "\xC5\xB5"=>'w', "\xC5\xB6"=>'Y',
         "\xC5\xB7"=>'y', "\xC5\xB8"=>'Y', "\xC5\xB9"=>'Z', "\xC5\xBA"=>'z',
         "\xC5\xBB"=>'Z', "\xC5\xBC"=>'z', "\xC5\xBD"=>'Z', "\xC5\xBE"=>'z',
-        ));
+        ]);
 
     // utf8_decode assumes that the input is ISO-8859-1 characters encoded
     // with UTF-8. This is OK since we want US-ASCII in the end.
     $str = trim(utf8_decode($str));
 
-    $str = strtr($str, array("\xC4"=>"Ae", "\xC6"=>"AE", "\xD6"=>"Oe", "\xDC"=>"Ue", "\xDE"=>"TH",
-        "\xDF"=>"ss", "\xE4"=>"ae", "\xE6"=>"ae", "\xF6"=>"oe", "\xFC"=>"ue", "\xFE"=>"th"));
+    $str = strtr($str, ["\xC4"=>"Ae", "\xC6"=>"AE", "\xD6"=>"Oe", "\xDC"=>"Ue", "\xDE"=>"TH",
+        "\xDF"=>"ss", "\xE4"=>"ae", "\xE6"=>"ae", "\xF6"=>"oe", "\xFC"=>"ue", "\xFE"=>"th"]);
 
     $str=str_replace("&amp;", "", $str);
 
@@ -177,7 +181,8 @@ function safeString($str, $strict=false, $extrachars="") {
  * @param string $type
  * @return string
  */
-function makeURI($str, $type='entry') {
+function makeURI($str, $type='entry')
+{
 
     $str = safeString($str);
 

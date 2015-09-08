@@ -15,13 +15,13 @@ $app->register(new RoutingServiceProvider());
 $app->register(new ValidatorServiceProvider());
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new HttpFragmentServiceProvider());
-$app->register(new TwigServiceProvider(), array(
+$app->register(new TwigServiceProvider(), [
     'twig.path'       => dirname(__DIR__).'/view',
-    'twig.options' => array(
+    'twig.options' => [
         'debug' => true,
         'cache' => __DIR__ . '/../cache'
-    )
-));
+    ]
+]);
 
 // Load the config, and set it in $app and the templates.
 $yaml = new Symfony\Component\Yaml\Parser();
@@ -32,13 +32,13 @@ $app['config'] = $yaml->parse(file_get_contents(__DIR__ . '/config.yml'));
 if (isset($app['config']['debug']) && $app['config']['debug'] == true) {
     $app['debug'] = true;
 
-    $app->register(new MonologServiceProvider(), array(
+    $app->register(new MonologServiceProvider(), [
         'monolog.logfile' => __DIR__ . '/../cache/silex_dev.log',
-    ));
+    ]);
 
-    $app->register(new WebProfilerServiceProvider(), array(
+    $app->register(new WebProfilerServiceProvider(), [
         'profiler.cache_dir' => __DIR__.'/../cache/profiler',
-    ));
+    ]);
 
 } else {
     ini_set('display_errors', 0);
@@ -47,24 +47,14 @@ if (isset($app['config']['debug']) && $app['config']['debug'] == true) {
 $app['twig']->addGlobal('config', $app['config']);
 
 // Set up DB connection
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-    'db.options'            => array(
+$app->register(new Silex\Provider\DoctrineServiceProvider(), [
+    'db.options'            => [
         'driver'    => 'pdo_mysql',
         'host'      => $app['config']['database']['host'],
         'dbname'    => $app['config']['database']['databasename'],
         'user'      => $app['config']['database']['user'],
         'password'  => $app['config']['database']['password'],
-    )
-));
+    ]
+]);
 
 return $app;
-
-
-// $app->register(new Silex\Provider\SessionServiceProvider());
-
-// $app->register(new Silex\Provider\MonologServiceProvider(), array(
-//     'monolog.logfile'       => __DIR__.'/debug.log',
-// ));
-
-
-
