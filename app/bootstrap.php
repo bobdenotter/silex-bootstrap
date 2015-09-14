@@ -45,15 +45,17 @@ if (isset($app['config']['debug']) && $app['config']['debug'] == true) {
 }
 
 // Set up DB connection
-$app->register(new Silex\Provider\DoctrineServiceProvider(), [
-    'db.options'            => [
-        'driver'    => 'pdo_mysql',
-        'host'      => $app['config']['database']['host'],
-        'dbname'    => $app['config']['database']['databasename'],
-        'user'      => $app['config']['database']['user'],
-        'password'  => $app['config']['database']['password'],
-    ]
-]);
+if (!empty($app['config']['database'])) {
+    $app->register(new Silex\Provider\DoctrineServiceProvider(), [
+        'db.options'            => [
+            'driver'    => 'pdo_mysql',
+            'host'      => !empty($app['config']['database']['host'])? $app['config']['database']['host'] : 'localhost',
+            'dbname'    => $app['config']['database']['databasename'],
+            'user'      => $app['config']['database']['user'],
+            'password'  => $app['config']['database']['password'],
+        ]
+    ]);
+}
 
 // Mount the Base Controllers
 $app->mount('/', new BaseControllers());
