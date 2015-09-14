@@ -1,45 +1,61 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Silex\Api\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * "root"
- */
-$app->get("/", function(Silex\Application $app)
+class BaseControllers implements ControllerProviderInterface
 {
 
-    $twigvars = [];
+    public function connect(Silex\Application $app)
+    {
+        /** @var $ctr \Silex\ControllerCollection */
+        $ctr = $app['controllers_factory'];
 
-    $twigvars['title'] = "Silex skeleton app";
+        $ctr->get("/", array($this, 'home'))
+            ->bind('home');
 
-    $twigvars['content'] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.";
+        $ctr->before(array($this, 'before'));
 
-    return $app['twig']->render('index.twig', $twigvars);
+        return $ctr;
 
+    }
 
-})
-->bind('homepage');
+    public function home(Silex\Application $app)
+    {
+        $twigvars = [];
+        $twigvars['title'] = "Silex skeleton app";
+        $twigvars['content'] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.";
 
+        return $app['twig']->render('index.twig', $twigvars);
+    }
 
+    /**
+     * Middleware function to do some tasks that should be done for all requests.
+     */
+    public function before(Request $request, Silex\Application $app)
+    {
+        $app['twig']->addGlobal('config', $app['config']);
+    }
 
-// $app->error(function (\Exception $e, Request $request, $code) use ($app)
-// {
-//     if ($app['debug']) {
-//         return;
-//     }
+    public function error(\Exception $e, Request $request, $code)
+    {
+        if ($app['debug']) {
+            return;
+        }
 
-//     // 404.html, or 40x.html, or 4xx.html, or error.html
-//     $templates = [
-//         'errors/'.$code.'.html.twig',
-//         'errors/'.substr($code, 0, 2).'x.html.twig',
-//         'errors/'.substr($code, 0, 1).'xx.html.twig',
-//         'errors/default.html.twig',
-//     ]);
+        // 404.html, or 40x.html, or 4xx.html, or error.html
+        $templates = [
+            'errors/'.$code.'.html.twig',
+            'errors/'.substr($code, 0, 2).'x.html.twig',
+            'errors/'.substr($code, 0, 1).'xx.html.twig',
+            'errors/default.html.twig',
+        ];
 
-//     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
-// });
+        return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
+    }
 
+}

@@ -11,10 +11,10 @@ if (!file_exists(__DIR__.'/vendor/autoload.php')) {
 }
 
 require_once __DIR__.'/vendor/autoload.php';
-
-$app = require_once __DIR__.'/app/bootstrap.php';
 require_once __DIR__.'/app/controllers.php';
 require_once __DIR__.'/app/twig_extensions.php';
 require_once __DIR__.'/app/lib.php';
+
+$app = require_once __DIR__.'/app/bootstrap.php';
 
 $app->run();

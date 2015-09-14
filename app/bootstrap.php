@@ -44,8 +44,6 @@ if (isset($app['config']['debug']) && $app['config']['debug'] == true) {
     ini_set('display_errors', 0);
 }
 
-$app['twig']->addGlobal('config', $app['config']);
-
 // Set up DB connection
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'db.options'            => [
@@ -56,5 +54,11 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), [
         'password'  => $app['config']['database']['password'],
     ]
 ]);
+
+// Mount the Base Controllers
+$app->mount('/', new BaseControllers());
+
+// Create the Twig extensions
+$app['twig']->addExtension(new TwigExtension($app));
 
 return $app;
