@@ -11,5 +11,7 @@
         "symfony/yaml": "~2.7",
         "symfony/var-dumper": "~2.7",
         "silex/web-profiler": "~2.0@dev"
-    }
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable" : true
 }
