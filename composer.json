@@ -4,14 +4,15 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "silex/silex": "~2.0@dev",
         "doctrine/dbal": "~2.5",
         "monolog/monolog": "~1.12",
-        "twig/twig": "~1.21",
-        "symfony/yaml": "~2.7",
-        "symfony/var-dumper": "~2.7",
-        "silex/web-profiler": "~2.0@dev"
+        "silex/silex": "~2.0@dev",
+        "silex/web-profiler": "~2.0@dev",
+        "symfony/yaml": "^3.0",
+        "symfony/var-dumper": "^3.0",
+        "symfony/web-profiler-bundle" : "^3.0",
+        "twig/twig": "~1.21"
     },
-    "minimum-stability" : "dev",
-    "prefer-stable" : true
+    "minimum-stability" : "beta",
+    "prefer-stable" : false
 }
