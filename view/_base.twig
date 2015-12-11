@@ -6,24 +6,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Your Page Description." />
         <title>{% block title %}(title goes here){% endblock %}</title>
- 
-        <link href="/view/styles/responsive.min.css" rel="stylesheet" />
-        <link href="/view/styles/app.css" rel="stylesheet" />
+
+        <link href="/view/css/app.css" rel="stylesheet" />
     </head>
     <body>
-    <nav role="navigation" class="shadow">
-        <div class="container">
-            <div class="row">
-                <a href="/" rel="home">{{ config.title }}</a>
-                <button data-dropdown-target="#navigation" class="visible-xxs visible-xs"><span class="visuallyhidden">Toggle Navigation</span></button>
-                <div id="navigation" class="collapse">
-                    <a href="/getting-started/" >Getting Started</a>
-                    <a href="/css/"  class="active" >CSS</a>
-                    <a href="/javascript/" >JavaScript</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+
+<div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle></button>
+  <div class="title-bar-title">Menu</div>
+</div>
+
+<div class="top-bar" id="example-menu">
+  <div class="top-bar-left">
+    <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
+      <li class="menu-text"><a href="/" rel="home">{{ config.title }}</a></li>
+      <li class="has-submenu">
+        <a href="#">One</a>
+        <ul class="submenu menu vertical" data-submenu>
+          <li><a href="#">sub One One</a></li>
+          <li><a href="#">sub Two</a></li>
+          <li><a href="#">sub Three</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Two</a></li>
+      <li><a href="#">Three</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><input type="search" placeholder="Search"></li>
+      <li><button type="button" class="button">Search</button></li>
+    </ul>
+  </div>
+</div>
 
     <div class="main container">
 
@@ -38,9 +53,8 @@
     </footer>
 
         <!-- Scripts at the bottom for improved performance. -->
-        <!-- jQuery, required for all responsive plugins. -->
-        <script src="/view/scripts/jquery.min.js"></script>
-        <script src="/view/scripts/responsive.min.js"></script>
-        <script src="/view/scripts/app.js"></script>
+        <script src="/view/js/jquery.min.js"></script>
+        <script src="/view/js/foundation.min.js"></script>
+        <script src="/view/js/app.js"></script>
     </body>
 </html>
