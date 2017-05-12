@@ -9,3 +9,4 @@ node_modules/
 app/config.yml
 cache/
 npm-debug.log
+.idea
